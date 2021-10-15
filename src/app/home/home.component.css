@@ -1,0 +1,11 @@
+zoom{
+    transition: transform 1s;
+}
+
+.zoom:hover{
+    background-color: lightgreen;
+    -ms-transform : scale(1.1);
+    -webkit-tranform : scale(1.1);
+    transform: scale(1.1);
+
+}

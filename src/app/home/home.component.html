@@ -1,0 +1,66 @@
+<div style="height: 43rem; background: #d5d5d5;">
+    <mat-toolbar>
+        <span style="font-family: 'Andada Pro', serif;">My Gallery Application</span>
+        <span class="example-spacer" style=" flex: 1 1 auto;"></span>
+        <button mat-icon-button style="font-family: 'Andada Pro', serif ;margin-right: 30px;" >
+            <mat-icon>account_circle</mat-icon>
+            {{username | titlecase}}
+        </button>
+        <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+          <mat-icon>menu</mat-icon>
+        </button> -->
+      </mat-toolbar>
+    
+    <div style="padding: 30px; " >
+        <mat-grid-list cols="4" rowHeight="1:1" gutterSize = "30px">
+           
+            <mat-grid-tile class="zoom" *ngFor="let item of images_data" style="background:rgb(237 226 255); border-radius: 15%;">
+               <div class="row" style="justify-content: center;text-align: center;">
+                <div class="row col-md-12" style="justify-content: center;">
+                    <img src="https://lh3.googleusercontent.com/lm7pvD6G05vQ7FBEEjJWYPSJtakMOtxdxb350TkKmMA0E3bPYiejAqFMNrGZrFDoRQ" style="height: 155px; width: auto;" alt="">
+                </div>
+                <div class="col-md-12 row" style="margin-top: 10px;margin-left: 10px;">
+                    <div class="col-md-6"  style="text-align: center;">
+                        <mat-icon matTooltip="Name" style=" color: rgb(61 68 70);">  collections icon</mat-icon>
+                        {{item.name}} 
+                    </div>
+                    <div class="col-md-6"  style="text-align: center;;">
+                        <mat-icon matTooltip="Author" style="color: rgb(61 68 70);" >  camera_alt</mat-icon>
+                    {{item.author}} 
+                    </div>
+                </div>
+    
+                <div class="col-md-12 row" style="margin-top: 30px;">
+                    <div class="col-md-6" >
+                        <mat-icon [matBadge]="item.like_count" matBadgeColor="warn" matTooltip="Like" style="color: rgb(57, 181, 223); cursor : pointer;" (click) = "liked(item)">  thumb_up</mat-icon>
+                       
+                    </div>
+                    <div class="col-md-6">
+                        <mat-icon [matBadge]="item.dislike_count" matBadgeColor="warn" matTooltip="Dislike" style="color: rgb(57, 181, 223);cursor : pointer;" (click) = "disliked(item)">  thumb_down</mat-icon>
+          
+                    </div>
+                </div>
+                <div *ngIf='item.action == "Liked"' class="col-md-12 row" style="justify-content: center;"> 
+                    <button mat-icon-button style="color:rgb(42, 240, 42)" >
+                        <mat-icon >how_to_reg</mat-icon>
+                        {{item.action}}
+                    </button>  
+                </div>
+                <div *ngIf='item.action == "Disliked"' class="col-md-12 row" style="justify-content: center;"> 
+                    <button mat-icon-button style="color:red ;">
+                        <mat-icon >how_to_reg</mat-icon>
+                        {{item.action}}
+                    </button>  
+                </div>
+                <div *ngIf='item.action != "Liked" && item.action != "Disliked"' class="col-md-12 row" style="justify-content: center;"> 
+                    <button mat-icon-button>
+                        <mat-icon >how_to_reg</mat-icon>
+                        {{item.action}}
+                    </button>  
+                </div>
+               </div>
+            </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    
+</div>
