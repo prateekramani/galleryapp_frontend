@@ -1,14 +1,16 @@
-<div style="height: 43rem; background: #d5d5d5;">
+<div style="height: 100%; background: #d5d5d5; overflow: hidden;">
     <mat-toolbar>
         <span style="font-family: 'Andada Pro', serif;">My Gallery Application</span>
         <span class="example-spacer" style=" flex: 1 1 auto;"></span>
-        <button mat-icon-button style="font-family: 'Andada Pro', serif ;margin-right: 30px;" >
+        <button mat-icon-button style="font-family: 'Andada Pro', serif ;margin-right: 40px;" >
             <mat-icon>account_circle</mat-icon>
-            {{username | titlecase}}
+            {{username | titlecase}}`
         </button>
-        <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-          <mat-icon>menu</mat-icon>
-        </button> -->
+        <button mat-icon-button class="example-icon" style="font-family: 'Andada Pro', serif ;margin-right: 30px;"  
+        aria-label="Example icon-button with share icon" (click) = "logout()">
+          <mat-icon>logout</mat-icon>
+            Logout
+        </button>
       </mat-toolbar>
     
     <div style="padding: 30px; " >

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 import { HomeservicesService } from '../services/homeservices.service';
 @Component({
   selector: 'app-login',
@@ -14,21 +15,19 @@ export class LoginComponent implements OnInit {
     password: new FormControl('',[Validators.required]),
   });
   iserror = false; 
-  constructor(private router: Router, private homeService : HomeservicesService,private _snackBar: MatSnackBar) { }
+  constructor(private authService : AuthService, private router: Router, private homeService : HomeservicesService,private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     
   }
 
-  submit() {debugger
+  submit() {
     if (this.form.valid) {
-      if (this.username?.value == 'admin' && this.password?.value == 'admin'){
-       this.homeService.setUsername(this.username?.value)
-        this.router.navigate(['/home'])
-      }
-      else{
-        this._snackBar.open("Incorrect Username/Password !!","Login Failed", {duration : 2000});
-      }
+        this.authService.login(this.username?.value,this.password?.value) .subscribe(data => { 
+          console.log("Is Login Success: " + data); 
+         if(data) this.router.navigate(['/home']); 
+         else { this._snackBar.open("Incorrect Username/Password !!","Login Failed", {duration : 2000});}
+    });
     }
     else{
       return;

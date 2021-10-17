@@ -9,7 +9,7 @@ export class HomeservicesService {
 
   constructor(private http: HttpClient) { }
 
-  username = ""
+  username : any = ''
 
   setUsername(username : string)
   {
@@ -21,6 +21,7 @@ export class HomeservicesService {
   }
 
   getActivity() : any {
+    this.username = localStorage.getItem('username')
     let  params = {username : this.username}
     return this.http.get(environment.baseApiUrl + 'activity', {params})
   }

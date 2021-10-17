@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { convertCompilerOptionsFromJson } from 'typescript';
+import { AuthService } from '../services/auth.service';
 import { HomeservicesService } from '../services/homeservices.service';
 
 @Component({
@@ -10,8 +12,8 @@ import { HomeservicesService } from '../services/homeservices.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private homeService : HomeservicesService,private _snackBar: MatSnackBar) { }
-  username = "admin"
+  constructor(private authService : AuthService, private router: Router ,private homeService : HomeservicesService,private _snackBar: MatSnackBar) { }
+  username : any= ""
   images_data = [ {
     _id : "",
     name : "",
@@ -22,7 +24,7 @@ export class HomeComponent implements OnInit {
   }]
 
   ngOnInit(): void {
-    this.username = this.homeService.username || "admin"
+    this.username = localStorage.getItem('username')
     this.homeService.getImages().subscribe((data: any)=>{
       this.homeService.getActivity().subscribe((res:any)=>{
         if (res){
@@ -40,7 +42,11 @@ export class HomeComponent implements OnInit {
         console.log(this.images_data)
       })
     })
-   
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 
   liked(item : any){
